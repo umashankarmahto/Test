@@ -47,7 +47,7 @@
    text-align: center;
    }
    
-   #username, #id{
+   #userName, #userid{
    
       font-size: 20px;
       font-family: monospace;
@@ -137,8 +137,8 @@
         <!-- left side box -->
         <div class="box1">
         
-         <p id="username">Username</p>
-         <p id="id">Id</p>
+         <p id="userName"></p>
+         <p id="userid"></p>
         
         </div>
         
@@ -195,7 +195,18 @@
    </div>
    
    
+   <%  String user = request.getParameter("username") ; 
+		   String id = request.getParameter("userid");  %> 
 
+
+  <script type="text/javascript">
+  
+  alert("Hello world");
+  
+  document.getElementById("userName").textContent  = '<%= user  %>';
+  document.getElementById("userid").textContent  = "User ID: "+ '<%= id  %>';
+  
+  </script>
 
 </body>
 </html>
