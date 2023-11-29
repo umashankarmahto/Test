@@ -164,7 +164,7 @@
    
    <div class = containerBox>
    
-       <div class="ContBox1">
+       <div class="ContBox1"  onclick="openRegister()">
         
         <p class="register">New Registration</p>
        
@@ -205,6 +205,14 @@
   
   document.getElementById("userName").textContent  = '<%= user  %>';
   document.getElementById("userid").textContent  = "User ID: "+ '<%= id  %>';
+  
+  function openRegister()
+  {
+	  
+	  window.location.href = "RegistrationForm.jsp";
+	  
+  }
+  
   
   </script>
 
