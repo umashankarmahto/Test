@@ -1,3 +1,9 @@
+<%@page import="javax.persistence.EntityTransaction"%>
+<%@page import="javax.persistence.EntityManager"%>
+<%@page import="javax.persistence.Persistence"%>
+<%@page import="javax.persistence.EntityManagerFactory"%>
+<%@page import="org.ranchi.com.Pojo.RegistrationDetails"%>
+<%@page import="org.hibernate.internal.build.AllowSysOut"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -68,6 +74,14 @@
   			  color: black;
   			  
   			}
+  			
+  			form{
+  			
+  			    width: 100%;
+  			 display: grid;
+             place-items: center;
+             padding-bottom: 50px;
+  			}
    
    </style>
 
@@ -78,6 +92,8 @@
       <div class="container">
       
            <h3>Registration Form</h3>
+           
+           <form action="RegistrationForm.jsp" method="post">
            
            <p>Personal Details</p>
            
@@ -182,9 +198,97 @@
                   
                        <input type="submit" value="Submit" /><br>
              </div>
-             
-             
-             
+       
+           </form>
+           
+           
+           <%
+           
+           String fullname = request.getParameter("fullname");
+           String father = request.getParameter("father");
+           String mother = request.getParameter("mother");
+           String dob = request.getParameter("dob");
+           String gender = request.getParameter("gender");
+           String email = request.getParameter("email");
+           String mobile = request.getParameter("mobile");
+           String address = request.getParameter("address");
+           String post = request.getParameter("post");
+           String district = request.getParameter("district");
+           String state = request.getParameter("state");
+           String pincode = request.getParameter("pincode");
+           String education = request.getParameter("education");
+           String college = request.getParameter("college");
+           String stream = request.getParameter("stream");
+           String totalmarks = request.getParameter("totalmarks");
+           String percentage = request.getParameter("percentage");
+           
+          
+           
+           if(fullname != null || father != null || mother !=null || dob != null 
+        	|| gender != null || email != null || mobile !=null || address !=null || post != null
+        	|| district !=null || state !=null || pincode !=null || education !=null || college !=null
+        	|| stream !=null || totalmarks !=null || percentage !=null)
+           {
+        	   System.out.println("Succuss fully send");
+        	   
+        	   System.out.println("fullname: "+fullname);
+               System.out.println("father: "+father);
+               System.out.println("mother: "+mother);
+               System.out.println("dob: "+dob);
+               System.out.println("gender: "+gender);
+               System.out.println("email: "+email);
+               System.out.println("mobile: "+mobile);
+               System.out.println("address: "+address);
+               System.out.println("post: "+post);
+               System.out.println("district: "+district);
+               System.out.println("state: "+state);
+               System.out.println("pincode: "+pincode);
+               System.out.println("education: "+education);
+               System.out.println("college: "+college);
+               System.out.println("stream: "+stream);
+               System.out.println("totalmarks: "+totalmarks);
+               System.out.println("percentage: "+percentage);
+               
+               RegistrationDetails rd = new RegistrationDetails();
+               rd.setFullname(fullname);
+               rd.setFather(father);
+               rd.setMother(mother);
+               rd.setDob(dob);
+               rd.setGender(gender);
+               rd.setEmail(email);
+               rd.setMobile(mobile);
+               rd.setAddress(address);
+               rd.setPost(post);
+               rd.setDistrict(district);
+               rd.setState(state);
+               rd.setPincode(pincode);
+               rd.setEducation(education);
+               rd.setCollege(college);
+               rd.setStream(stream);
+               rd.setTotalmarks(totalmarks);
+               rd.setPercentage(percentage);
+               
+               EntityManagerFactory factory = Persistence.createEntityManagerFactory("dev");
+               EntityManager manager = factory.createEntityManager();
+               EntityTransaction transaction = manager.getTransaction();;
+               transaction.begin();
+               manager.persist(rd);
+               transaction.commit();
+               %>
+                    <script type="text/javascript">alert("Successfully Registered");</script>
+               
+               <%
+               manager.close();
+               factory.close();
+               
+              
+           }
+           else
+           {
+        	   System.out.print("Succuss fully  not send");
+           }
+        
+           %>
            
       
       </div>
