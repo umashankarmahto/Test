@@ -28,3 +28,11 @@ Steps to run import spring boot web project
 
 ****************Thank You**************
 
+
+if you want to save javascript file in spring boot project.
+then follow some steps:-
+1. inside the path, we are create a file javascript file or Folder
+   ------> src/main/resources/static
+
+
+
