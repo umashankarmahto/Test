@@ -1,0 +1,158 @@
+*JPA Query for Retrieve data from Database
+  
+   
+-----------Retrieve data With Where Clause--------------
+
+String qry = "SELECT st FROM YourClasss st WHERE st.propertyName = :propertyValue";
+
+TypedQuery<YourClass> query = manager.createQuery(qry, YourClass.class);
+
+// Set parameter values
+query.setParameter("propertyValue", propertyValue);
+
+List<YourClass> resultList = query.getResultList();
+
+---------Retrieve data With Select Clause--------------
+
+String qry= "SELECT entity FROM YourEntityClass entity";
+
+TypedQuery<YourClass> query = entityManager.createQuery(jpqlQuery, YourClass.class);
+
+List<YourClass> resultList = query.getResultList();
+
+---------Delete data from the database--------------------
+
+String jpqlQuery = "DELETE FROM YourClass entity WHERE entity.propertyName = :propertyValue";
+
+EntityTransaction transaction = entityManager.getTransaction();
+transaction.begin();
+
+Query query = entityManager.createQuery(jpqlQuery);
+query.setParameter("propertyValue", propertyValue);
+
+int deletedCount = query.executeUpdate();
+
+transaction.commit();
+
+System.out.println("Number of records deleted: " + deletedCount);
+
+---------All Importance Query for EntityManager-----------
+
+java
+
+EntityManager entityManager = // obtain EntityManager instance
+YourEntityClass entity = new YourEntityClass(); // create a new entity
+entityManager.persist(entity); // persist the entity to the database
+
+Retrieving Entities by Primary Key:
+
+java
+
+EntityManager entityManager = // obtain EntityManager instance
+YourEntityClass entity = entityManager.find(YourEntityClass.class, primaryKey);
+
+Updating Entities:
+
+java
+
+EntityManager entityManager = // obtain EntityManager instance
+YourEntityClass entity = entityManager.find(YourEntityClass.class, primaryKey);
+entity.setSomeProperty(newValue);
+// Changes will be automatically persisted when the transaction commits.
+
+Removing Entities:
+
+java
+
+EntityManager entityManager = // obtain EntityManager instance
+YourEntityClass entity = entityManager.find(YourEntityClass.class, primaryKey);
+entityManager.remove(entity);
+
+Querying with JPQL:
+
+java
+
+EntityManager entityManager = // obtain EntityManager instance
+String jpqlQuery = "SELECT entity FROM YourEntityClass entity WHERE entity.property = :propertyValue";
+TypedQuery<YourEntityClass> query = entityManager.createQuery(jpqlQuery, YourEntityClass.class);
+query.setParameter("propertyValue", propertyValue);
+List<YourEntityClass> resultList = query.getResultList();
+
+Native SQL Queries:
+
+java
+
+EntityManager entityManager = // obtain EntityManager instance
+String sqlQuery = "SELECT * FROM your_entity_table WHERE property = :propertyValue";
+Query query = entityManager.createNativeQuery(sqlQuery, YourEntityClass.class);
+query.setParameter("propertyValue", propertyValue);
+List<YourEntityClass> resultList = query.getResultList();
+
+Flushing Changes to the Database:
+
+java
+
+EntityManager entityManager = // obtain EntityManager instance
+entityManager.flush(); // Flush changes to the database
+
+Managing Transactions:
+
+java
+
+EntityManager entityManager = // obtain EntityManager instance
+EntityTransaction transaction = entityManager.getTransaction();
+transaction.begin();
+
+// Perform operations...
+
+transaction.commit(); // Commit the transaction
+// or transaction.rollback() to rollback changes
+
+Detaching and Merging Entities:
+
+java
+
+EntityManager entityManager = // obtain EntityManager instance
+YourEntityClass detachedEntity = entityManager.detach(entity);
+// Make changes to detachedEntity
+YourEntityClass mergedEntity = entityManager.merge(detachedEntity);
+
+Refreshing Entities:
+
+java
+
+EntityManager entityManager = // obtain EntityManager instance
+entityManager.refresh(entity); // Refresh the state of the entity with data from 
+
+
+******************All Static Folder we save here********************
+In a Maven web application project created using the maven-archetype-webapp archetype, static resources such as images are commonly stored in the src/main/webapp directory. This is because the webapp directory is the default location for web resources in a standard Maven web project.
+
+Here's an example structure for a Maven web application:
+
+plaintext
+
+your-webapp/
+|-- src/
+|   `-- main/
+|       |-- java/
+|       |-- resources/
+|       `-- webapp/
+|           |-- WEB-INF/
+|           |-- images/
+|               |-- your-image.jpg
+|           |-- Css
+|               |-- index.css
+|           |-- JavaScript
+|               |-- index.js
+|-- target/
+|-- pom.xml
+
+***************Ancher tag <a> **********************
+ <h1>Welcome to My Web Application</h1>
+
+    <!-- Anchor tag linking to another page -->
+    <a href="anotherPage.jsp">Go to Another Page</a>
+
+    <!-- Anchor tag linking to an external URL -->
+    <a href="https://www.example.com" target="_blank">Visit Example Website</a>
