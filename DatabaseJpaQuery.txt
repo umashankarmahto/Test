@@ -36,6 +36,23 @@ transaction.commit();
 
 System.out.println("Number of records deleted: " + deletedCount);
 
+
+------------Insert Jpa Query to insert some data in database----------------
+entityManager.createQuery("INSERT INTO YourEntityClass(field1, field2) VALUES (:value1, :value2)")
+                    .setParameter("value1", entity.getField1())
+                    .setParameter("value2", entity.getField2())
+                    .executeUpdate();
+
+ 		*************************************************
+
+int rowsAffected = entityManager.createQuery("INSERT INTO YourEntityClass(field1, field2) VALUES (:value1, :value2)")
+    .setParameter("value1", entity.getField1())
+    .setParameter("value2", entity.getField2())
+    .executeUpdate();
+
+System.out.println("Number of rows inserted: " + rowsAffected);
+
+
 ---------All Importance Query for EntityManager-----------
 
 java
