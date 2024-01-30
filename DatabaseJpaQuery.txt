@@ -52,6 +52,46 @@ int rowsAffected = entityManager.createQuery("INSERT INTO YourEntityClass(field1
 
 System.out.println("Number of rows inserted: " + rowsAffected);
 
+*****************************Update the HQL Query********************************
+// Example HQL update query
+            String hqlUpdate = "UPDATE Admin a SET a.password = :newPassword WHERE a.id = :adminId";
+            Query query = em.createQuery(hqlUpdate);
+
+            // Set parameters
+            query.setParameter("newPassword", "newPassword123");
+            query.setParameter("adminId", 1L); // Replace with the actual admin ID
+
+            // Execute the update query
+            int updatedEntities = query.executeUpdate();
+            System.out.println("Number of updated entities: " + updatedEntities);
+
+
+// Example JPQL update query
+            String jpqlUpdate = "UPDATE Admin a SET a.password = :newPassword WHERE a.id = :adminId";
+            TypedQuery<Void> query = em.createQuery(jpqlUpdate, Void.class);
+            //String jpqlUpdate = "UPDATE Admin a SET a.password = :newPassword WHERE a.id = :adminId AND a.username = :username";
+            //String jpqlUpdate = "UPDATE Admin a SET a.password = :newPassword WHERE a.id = :adminId OR a.username = :username";
+            // Set parameters
+            query.setParameter("newPassword", "newPassword123");
+            query.setParameter("adminId", 1L); // Replace with the actual admin ID
+
+            // Execute the update query
+            query.executeUpdate();
+
+*****************Delete Query**************************
+// Example JPQL delete query using TypedQuery
+            String jpqlDelete = "DELETE FROM Admin a WHERE a.id = :adminId";
+            TypedQuery<Void> query = em.createQuery(jpqlDelete, Void.class);
+
+            // Set parameter
+            query.setParameter("adminId", 1L); // Replace with the actual admin ID
+
+            // Execute the delete query
+            query.executeUpdate();
+
+            transaction.commit();
+*********************************************************
+
 
 ---------All Importance Query for EntityManager-----------
 
