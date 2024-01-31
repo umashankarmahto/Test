@@ -52,6 +52,20 @@ int rowsAffected = entityManager.createQuery("INSERT INTO YourEntityClass(field1
 
 System.out.println("Number of rows inserted: " + rowsAffected);
 
+               **************************************************
+String qry = "INSERT INTO Admin(username, password) VALUES( ?, ?)";
+		  Query query = manager.createNativeQuery(qry);
+		  query.setParameter(1,"abc@gmail.com"); 
+		  query.setParameter(2, "123456");
+		  int row = query.executeUpdate(); 
+		  transaction.commit();
+		  if(row>0)
+		  {
+			  System.out.println("Successfully Insert Records");  
+		  }else {
+			  System.out.println("Records not Saved!");
+		  }
+
 *****************************Update the HQL Query********************************
 // Example HQL update query
             String hqlUpdate = "UPDATE Admin a SET a.password = :newPassword WHERE a.id = :adminId";
