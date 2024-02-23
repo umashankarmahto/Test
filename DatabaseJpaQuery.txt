@@ -1,3 +1,5 @@
+TypedQuery is not used with Update and Remove clause.
+
 *JPA Query for Retrieve data from Database
   
    
@@ -227,3 +229,23 @@ your-webapp/
 
     <!-- Anchor tag linking to an external URL -->
     <a href="https://www.example.com" target="_blank">Visit Example Website</a>
+
+
+********************************SELECT Clause********************************
+String jpql = "SELECT e FROM Registration e WHERE e.stream = :stream AND e.gender = :gender";
+				//String jpql = "SELECT e FROM Registration e";
+				
+				EntityManagerFactory factory = Persistence.createEntityManagerFactory("dev");
+				EntityManager manager = factory.createEntityManager();
+				EntityTransaction transaction = manager.getTransaction();
+				transaction.begin();
+				
+				TypedQuery<Registration> query = manager.createQuery(jpql, Registration.class);
+				query.setParameter("stream", "Science");
+				query.setParameter("gender", "male");
+				List<Registration> resultList = query.getResultList();
+				
+				transaction.commit();
+
+
+************************************************************************************************
