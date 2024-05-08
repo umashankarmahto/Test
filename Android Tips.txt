@@ -1,0 +1,7 @@
+
+*****************Cut Price***************
+// To apply strikethrough
+textview.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG | Paint.ANTI_ALIAS_FLAG);
+
+// To remove strikethrough
+textview.getPaint().setFlags(0); // This makes it appear as normal text

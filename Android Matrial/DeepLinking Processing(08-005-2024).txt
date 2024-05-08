@@ -1,0 +1,62 @@
+Steps1: Set up in menifest
+
+            <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="https" />
+                <data android:host="www.umaexample.com" />
+            </intent-filter>
+
+            <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="http" />
+                <data android:host="www.www.umaexample.com" />
+            </intent-filter>
+
+
+Step 2: set this code from share products page
+
+ public void shareProduct(String url){
+
+        String deepLink = "www.umaexample.com/product?prod_id=" +prod_id+"&dealofday="+dealofday;
+        Intent shareIntent = new Intent(Intent.ACTION_SEND);
+        shareIntent.setType("text/plain");
+        shareIntent.putExtra(Intent.EXTRA_TEXT, deepLink);
+        startActivity(Intent.createChooser(shareIntent, "Share product"));
+
+        /*Intent intent = new Intent(android.content.Intent.ACTION_SEND);
+        String shareBody = ""+url;
+        intent.setType("text/plain");
+        *//*Applying information Subject and Body.*//*
+        intent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Bhatia Disc");
+        intent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
+        startActivity(Intent.createChooser(intent, "sms"));*/
+    }
+
+
+
+Step 3: in Terminal 
+code: ./gradlew signinReport
+for find sha-256 code
+
+Step 4: in server  root address set 
+
+https://www.advertiseplus.in/.well-known/assetlinks.json
+
+[
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.umashankar.plus",
+      "sha256_cert_fingerprints": [
+        "B1:05:16:3E:20:CA:BE:00:CC:5F:3F:4A:83:CF:68:E4:86:29:3E:39:7E:48:E6:6C:B7:72:4A:11:C7:62:80:A2"
+      ]
+    }
+  }
+]
