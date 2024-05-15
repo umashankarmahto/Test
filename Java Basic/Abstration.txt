@@ -1,0 +1,27 @@
+Abstraction is the process of hiding certain details 
+and exposing only essential information to the user. 
+It allows you to create abstract classes and abstract methods.
+
+*****Abstract Class*****
+.An abstract class is a restricted class that cannot be directly instantiated 
+   (i.e., you cannot create objects of an abstract class).
+.To access an abstract class, you must inherit from it 
+   (i.e., create a subclass that extends the abstract class).
+.Abstract classes can have both abstract methods (without a body) and regular methods (with a body).
+
+abstract class Animal {
+    public abstract void animalSound(); // Abstract method
+    public void sleep() {
+        System.out.println("Zzz"); // Regular method
+    }
+}
+
+*****Abstract Method*****
+.An abstract method is a method declared in an abstract class without providing its implementation (i.e., no method body).
+.The implementation of the abstract method is provided by the subclass that inherits from the abstract class.
+
+abstract void animalSound(); // Abstract method
+
+Why Use Abstraction?
+To achieve security, hiding certain details and showing only important information about an object.
+Note that abstraction can also be achieved using interfaces.
