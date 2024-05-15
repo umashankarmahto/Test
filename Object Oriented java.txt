@@ -1,0 +1,45 @@
+Object-Oriented Programming (OOP) in Java is a powerful paradigm that allows you to design and structure your code around objects. Let’s break down the key concepts:
+
+Classes and Objects:
+A class is like a blueprint or template for creating objects. 
+It defines the properties (also known as fields) and behaviors (also known as methods)
+that the objects of that class will have.
+An object is an instance of a class. When you create an object,
+ it inherits all the characteristics (fields and methods) defined in its class.
+
+Advantages of OOP in Java:
+Modularity:
+OOP promotes breaking down complex problems into smaller, manageable objects.
+Each object encapsulates its own state and behavior.
+
+Reusability:
+Once you’ve defined a class, you can create multiple objects from it. 
+This reusability reduces redundancy and makes your code more efficient.
+
+Maintainability: 
+OOP encourages a clear structure. 
+Changes or updates to one part of the code (e.g., a class) don’t necessarily impact other parts,
+making maintenance easier.
+
+Abstraction:
+You can hide the implementation details of a class and expose only what’s necessary. This simplifies the interaction with objects.
+
+Inheritance:
+Classes can inherit properties and behaviors from other classes. 
+It allows you to create a hierarchy of related classes.
+
+The Four Pillars of OOP:
+Abstraction:
+Representing essential features without exposing unnecessary details. 
+For example, a Vehicle class can represent any vehicle type (car, bike, etc.) without specifying the exact details of each.
+
+Encapsulation: 
+Bundling data (fields) and methods (behavior) together within a class.
+Access modifiers (public, private, etc.) control the visibility of these components.
+
+Inheritance: 
+Creating a new class based on an existing one.
+The new class (subclass or derived class) inherits properties and behaviors from the existing class (superclass or base class).
+
+Polymorphism:
+The ability of objects to take on multiple forms. It allows you to use a single interface (method or class) to represent different types of objects
