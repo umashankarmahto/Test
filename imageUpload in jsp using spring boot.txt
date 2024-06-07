@@ -1,0 +1,171 @@
+*****File Structure****
+src/main/java/com/example/demo
+├── controller
+│   └── StudentController.java
+├── model
+│   └── Student.java
+├── repository
+│   └── StudentRepository.java
+├── service
+│   └── StudentService.java
+├── DemoApplication.java
+src/main/resources
+├── static
+│   └── images
+├── templates
+├── application.properties
+src/main/webapp
+├── WEB-INF
+│   └── views
+│       └── student.jsp
+└── resources
+    └── css
+        └── style.css
+
+
+
+*******Pojo Class*********
+
+package com.example.demo.model;
+
+import javax.persistence.*;
+import java.util.Arrays;
+
+@Entity
+public class Student {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private String name;
+    private String email;
+
+    @Lob
+    private byte[] profileImage;
+
+    // Getters and Setters
+}
+
+
+*****Repository  Interface****
+
+package com.example.demo.repository;
+
+import com.example.demo.model.Student;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface StudentRepository extends JpaRepository<Student, Long> {
+}
+
+
+******Service Class*****
+
+package com.example.demo.service;
+
+import com.example.demo.model.Student;
+import com.example.demo.repository.StudentRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
+import java.util.List;
+
+@Service
+public class StudentService {
+
+    @Autowired
+    private StudentRepository studentRepository;
+
+    public Student saveStudent(String name, String email, MultipartFile profileImage) throws IOException {
+        Student student = new Student();
+        student.setName(name);
+        student.setEmail(email);
+        student.setProfileImage(profileImage.getBytes());
+        return studentRepository.save(student);
+    }
+
+    public List<Student> getAllStudents() {
+        return studentRepository.findAll();
+    }
+}
+
+
+*****Controller Class*****
+
+package com.example.demo.controller;
+
+import com.example.demo.model.Student;
+import com.example.demo.service.StudentService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
+
+@Controller
+public class StudentController {
+
+    @Autowired
+    private StudentService studentService;
+
+    @GetMapping("/students")
+    public String getStudents(Model model) {
+        model.addAttribute("students", studentService.getAllStudents());
+        return "student";
+    }
+
+    @PostMapping("/students")
+    public String saveStudent(@RequestParam("name") String name,
+                              @RequestParam("email") String email,
+                              @RequestParam("profileImage") MultipartFile profileImage) {
+        try {
+            studentService.saveStudent(name, email, profileImage);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return "redirect:/students";
+    }
+}
+
+*******Html Form File*****
+<!-- src/main/webapp/WEB-INF/views/student.jsp -->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Students</title>
+</head>
+<body>
+    <h2>Student Registration</h2>
+    <form action="/students" method="post" enctype="multipart/form-data">
+        Name: <input type="text" name="name" /><br/>
+        Email: <input type="text" name="email" /><br/>
+        Profile Image: <input type="file" name="profileImage" /><br/>
+        <input type="submit" value="Submit" />
+    </form>
+
+    <h2>Student List</h2>
+    <table border="1">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Profile Image</th>
+        </tr>
+        <c:forEach var="student" items="${students}">
+            <tr>
+                <td>${student.id}</td>
+                <td>${student.name}</td>
+                <td>${student.email}</td>
+                <td><img src="data:image/jpeg;base64,${student.profileImage}" width="100" height="100"/></td>
+            </tr>
+        </c:forEach>
+    </table>
+</body>
+</html>
+
+*********Database setting in Propertise*********

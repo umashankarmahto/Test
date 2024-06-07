@@ -1,0 +1,48 @@
+public class Student {
+    private String name;
+    private int age;
+    // Getters and setters
+}
+
+*******************************************************************
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class StudentController {
+
+    @GetMapping("/student")
+    public Student getStudent() {
+        // Here you can fetch student details from your database or any other source
+        Student student = new Student();
+        student.setName("John Doe");
+        student.setAge(20);
+        return student;
+    }
+}
+*******************************************************************
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Details</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $.ajax({
+                type: "GET",
+                url: "/student",
+                success: function (data) {
+                    $("#studentName").text(data.name);
+                    $("#studentAge").text(data.age);
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <h1>Student Details</h1>
+    <p>Name: <span id="studentName"></span></p>
+    <p>Age: <span id="studentAge"></span></p>
+</body>
+</html>
