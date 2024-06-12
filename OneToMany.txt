@@ -1,0 +1,60 @@
+package com.ranchi.SpringJsp.OneToMany;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+
+@Controller
+public class ControlleroTm {
+
+	@Autowired
+	StudentRepository studentRepository;
+	
+	@Autowired
+	SubjectRepository subjectRepository;
+	
+	@GetMapping("/getOTM")
+	public void getOtM()
+	{
+		Student student = new Student();
+		Subject subject;
+	
+		List<Subject> list = new ArrayList<Subject>();
+		
+		student.setName("Umashankar Mahto");
+		
+		subject = new Subject();
+		subject.setSubjectName("Physics");
+		subject.setStudent(student);
+		list.add(subject);
+		
+		subject = new Subject();
+		subject.setSubjectName("Mathematics");
+		subject.setStudent(student);
+		list.add(subject);
+	
+		subject = new Subject();
+		subject.setSubjectName("Chemistry");
+		subject.setStudent(student);
+		list.add(subject);
+		
+		subject = new Subject();
+		subject.setSubjectName("Biologogy");
+		subject.setStudent(student);
+		list.add(subject);
+		
+		Subject subjectFinal = new Subject();
+		
+		student.setSubject(list);
+		subjectFinal.setStudent(student);
+		
+		studentRepository.save(student);
+		subjectRepository.saveAllAndFlush(list);
+		
+		
+		
+	}
+}
