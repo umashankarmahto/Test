@@ -1,0 +1,17 @@
+ @PostMapping("/login") public String loginStudent(Model model,@RequestParam
+	 String name, @RequestParam String password) {
+	  
+	  Student sp = sReo.findByNameAndPassword(name, password); if(sp != null) {
+	  model.addAttribute("studend",sp); System.out.println("Saved records"); }else
+	  { model.addAttribute("studend",sp); System.out.println("not Saved records");
+	  }
+	  
+	  return "redirect:/st";
+	  
+	  }
+	
+
+// Repository Call
+
+@Query("SELECT u FROM Student u WHERE u.name = :name AND u.password = :password" )
+Student findByNameAndPassword(@Param("name") String username, @Param("password") String password);

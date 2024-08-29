@@ -1,0 +1,7 @@
+Create a New Project:
+
+--> npx react-native init MyProject --package=com.mycompany.myproject
+cd MyProject
+
+--------------
+npx react-native start

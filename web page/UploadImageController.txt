@@ -1,0 +1,39 @@
+ 
+		 @PostMapping("/saveuploadFile")
+		 public String saveFileUpload(@RequestParam("name") String name,
+		                           @RequestParam("city") String city,
+		                           @RequestParam("gender") String gender,
+		                           @RequestParam("photo") MultipartFile photo) {
+		    	
+		
+		         String realPath = servletContext.getRealPath("/static/images/");
+		         File fileDir = new File(realPath);
+		         if (!fileDir.exists()) {
+		             fileDir.mkdirs();
+		         }
+
+		         String fileName = System.currentTimeMillis() + "_" + photo.getOriginalFilename();
+		         String filePath = fileDir + "/" + fileName;
+		         File dest = new File(filePath);
+		         try {
+					photo.transferTo(dest);
+					 UserDetails user = new UserDetails();
+			            user.setName(name);
+			            user.setCity(city);
+			            user.setGender(gender);
+			            //user.setPhotoPath(filePath);
+			            user.setPhotoPath(fileName);
+			            userRepository.save(user);
+					
+					
+				} catch (IllegalStateException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		    	
+					
+		        return "FileUploadPhoto";
+		    }
