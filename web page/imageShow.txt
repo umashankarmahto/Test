@@ -1,0 +1,9 @@
+//Image Show
+<html>
+<body>
+    <h2>User Details</h2>
+    Username: ${user.username}<br/>
+    Email: ${user.email}<br/>
+    <img src="data:image/jpeg;base64,${user.photo}" alt="User Photo"/><br/>
+</body>
+</html>

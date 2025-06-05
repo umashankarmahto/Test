@@ -1,0 +1,3 @@
+StudentCourseList
+CourseDetails(int Batchid)
+CourseMembership(int subjectid, int Batchid)
